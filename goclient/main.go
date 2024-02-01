@@ -11,15 +11,15 @@ import (
 )
 
 var (
-	clientID     = "local_client_dev"
-	clientSecret = "96cb5abb-64c2-4fde-a69e-f91c8e79b22a"
+	clientID     = "dev-client"
+	clientSecret = "9xNx0pmZMSEbLhIiV0Gz7Czt1MFgS0y1"
 )
 
 func main() {
 
 	ctx := context.Background()
 
-	provider, err := oidc.NewProvider(ctx, "http://localhost:8080/auth/realms/local_relm_dev")
+	provider, err := oidc.NewProvider(ctx, "http://localhost:8082/auth/realms/dev-realm")
 
 	if err != nil {
 		log.Fatal(err)

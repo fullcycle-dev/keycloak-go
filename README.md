@@ -10,73 +10,77 @@
 
 
 ## Execução
-
+   
 1. Start container com o Keycloak
 
-    $ docker run -p 8080:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin quay.io/keycloak/keycloak:11.0.1
+    ```sh
+    $ docker-composer up -d 
+    ```
 
-2. Login no [Administration Console](http://localhost:8080)
-
-    user=admin, password=admin
+2. Login no [Administration Console](http://localhost:8082)
+    ```sh
+    $ user=admin 
+    $ password=admin
+    ```
 
 3. Criar um realm
     
-    - Clique "Add realm" no menu suspenso onde diz "Master"
+    - Clique **"Add realm"** no menu suspenso onde diz **"Master"**
 
-    - Name: local_realm_dev
+    - **Name:** dev-realm
 
-    - Clique "Create"
+    - Clique em  **"Create"**
 
     Verificar se está no realm recém criado
 
 4. Criar client
 
-    - Clique "Clients" \ "Create"
+    - Clique em **"Clients"** \ **"Create"**
 
     - Preencher os campos
 
-      - Client ID: local_client_dev
-      - Client Protocol: openid-connect
-      - Root URL: http://localhost:8081
+      - **Client ID:** dev-client
+      - **Client Protocol:** openid-connect
+      - **Root URL:** http://localhost:8081
 
-    - Clique "Save"  
+    - Clique em  **"Save"**  
 
-    - Aba "Settings"
+    - Aba **"Settings"**
 
-      - Access Type: confidential
-      - Clique "Save"
-
+      - **Access Type:** confidential
+      - Clique em **"Save"**
 
 5. Criar usuário
 
-    - Clique "Users" \ "Add user"
+    - Clique em **"Users"** \ **"Add user"**
 
     - Preencher os campos
 
-      - Username: loca_user_dev
-      - Email: 
-      - First Name: Rafael
-      - Last Name: Silva
-      - User Enabled (usuário ativo): ON
-      - Email Verified (usuário já verificado): ON      
+      - **Username:** dev-user
+      - **Email:** 
+      - **First Name:** Rafael
+      - **Last Name:** Silva
+      - **User Enabled (usuário ativo):** ON
+      - **Email Verified (usuário já verificado):** ON      
 
-    - Clique "Save"      
+    - Clique em **"Save"**      
 
-    - Clique "Credentials"
-      - Preencher "Password"
-      - Temporary (se o password é temporário): OFF
-      - Clique "Set password"
+    - Clique em **"Credentials"**
+      - Preencher o **"Password"**
+      - **Temporary (se o password é temporário):** OFF
+      - Clique em **"Set password"** e confirme!
 
-6. Configurar os campos no arquivo main.go
+6. Configurar os campos no arquivo main.go no Keycloak em Clients **ClientID** e na aba Credentials **Secret**
 
-    clientID: local_client_dev
+    - **clientID:** dev-client
 
-    clientSecret: "Secret" no Keycloak
+    - **clientSecret:** **"Secret"**
     
-7. Executar os comandos para subir a aplicação na porta 8081
-
+7. Executar os comandos para subir a aplicação na porta 8082
+    ```sh
     $ go mod init goclient
 
     $ go run goclient/main.go
+    ```
 
 8. Acessar o navegador http://localhost:8081/    
